@@ -46,7 +46,7 @@ class MySqlConnector {
         $password = $_ENV['DB_PASSWORD'];
 
         $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
-
+        
         try {
             $pdo = new \PDO($dsn, $username, $password, [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,

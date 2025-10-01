@@ -42,14 +42,14 @@ class HabitRepository extends AbstractRepository
         $name = $data['name'];   
         $description = $data['description'];
 
-        // Requête construite par concaténation (vulnérable)
-        $sql = "INSERT INTO habits (user_id, name, description, created_at) VALUES (" 
-            . $data['user_id'] . ", '" 
-            . $name . "', '" 
-            . $description . "', NOW())";
+        // Requête préparée
+        $sql = "INSERT INTO habits (user_id, name, description, created_at) VALUES (:user_id, :name, :description, NOW())";
+        $query = $this->getConnection()->prepare($sql);
+        $query->bindParam(':user_id', $data['user_id']);
+        $query->bindParam(':name', $name);
+        $query->bindParam(':description', $description);
 
-        $query = $this->getConnection()->query($sql);
-
+        $query->execute();
         return $this->getConnection()->lastInsertId();
     }
 
