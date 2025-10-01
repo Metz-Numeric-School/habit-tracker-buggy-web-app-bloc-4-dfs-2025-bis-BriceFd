@@ -12,6 +12,7 @@ Suite à un audit effectué en amont, voici les failles et les bugs qui ont ét�
 ``$user['password'] = password_hash($user['password'], PASSWORD_BCRYPT);``
 et j'ai changé la vérification de mot de passe dans SecurityController.php :
 `if(password_verify($password, $user->getPassword())) {}`
+Les utilisateurs créés avec le script n'auront pas le mot de passe haché mais ceux crées par le site auront leur mot de passe haché
 
 * Des injections de type XSS ont été détéctées sur certains formulaires 
 
